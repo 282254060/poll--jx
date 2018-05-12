@@ -1,0 +1,45 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+ <head>
+    <meta charset="utf-8">
+    <title>poll system index</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}">	
+    <script rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>	
+    <script src="{% static 'jquery/jquery-3.2.1.min.js' %}"></script> 	 
+ </head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-xs-9">
+                    <h1>陕西科技大学镐京学院投票系统
+                        <small>全球首发</small>
+                    </h1>
+                </div>
+            <div class="col-xs-3">
+            </div>
+        </div>
+    </div>
+	<ul class="nav nav-tabs">
+        	<li role="presentation"><a href="#">娱乐</a></li>
+       	 	<li role="presentation"><a href="#">美食</a></li>
+        	<li role="presentation"><a href="#">旅游</a></li>
+		<li role="presentation"><a href="#">工具</a></li>
+        </ul>
+
+    {% if latest_question_list %}
+        <ul class="list-group">
+        {% for question in latest_question_list %}
+            <!-- avoid hardcode use name for url defined in poll/urls.py-->
+            <li class="list-group-item"><a href="{%  url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+         <p class="alert alert-warning">No polls are available.</p>
+    {% endif %}
+    </div>
+</body>
+</html>
